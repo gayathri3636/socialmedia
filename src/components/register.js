@@ -1,39 +1,104 @@
 import React from "react";
-import { FormControl, FormGroup, Form, Button } from "react-bootstrap";
+import { Form, Input, Button, Checkbox } from "antd";
+import {
+  UserOutlined,
+  LockOutlined,
+  ContactsOutlined,
+} from "@ant-design/icons";
 
-export default function Register() {
+export default function RegisterScreen() {
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+  };
+
   return (
-    <Form>
-      <FormGroup>
-        <Form.Label>First Name</Form.Label>
-        <FormControl type="text" placeholder="Enter FirstName" />
-      </FormGroup>
-      <FormGroup>
-        <Form.Label>LastName</Form.Label>
-        <FormControl type="text" placeholder="Enter LastName" />
-      </FormGroup>
-      <FormGroup controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <FormControl type="email" placeholder="Enter email" />
-        {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
-      </FormGroup>
+    <Form
+      name="normal_register"
+      className="register-form"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+    >
+      <Form.Item
+        name="firstname"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Firstname!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<ContactsOutlined className="site-form-item-icon" />}
+          placeholder="Firstname"
+        />
+      </Form.Item>
+      <Form.Item
+        name="lastname"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Lastname!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<ContactsOutlined className="site-form-item-icon" />}
+          placeholder="Lastname"
+        />
+      </Form.Item>
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Username"
+        />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Password!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item
+        name="confirmpassword"
+        rules={[
+          {
+            required: true,
+            message: "Please confirm your Password!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Confirm Password"
+        />
+      </Form.Item>
 
-      <FormGroup controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <FormControl type="password" placeholder="Password" />
-      </FormGroup>
-      <FormGroup controlId="formBasicPassword">
-        <Form.Label>Confirm Password</Form.Label>
-        <FormControl type="password" placeholder="please confirm Password" />
-      </FormGroup>
-      {/* <FormGroup controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </FormGroup> */}
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Register
+        </Button>
+        Or <a href="">Already have account Login!</a>
+      </Form.Item>
     </Form>
   );
 }
