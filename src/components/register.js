@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import {
   UserOutlined,
   LockOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
+import 'antd/dist/antd.css';
+import './register.css';
 
 export default function RegisterScreen() {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const [registers, setRegisters] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword:""
+  })
+
+  const onFinish = (value) => {
+    console.log("Received values of form: ", registers);
   };
 
   return (
+    <>
+    <h1 className="hregister">Register</h1>
+    <div 
+    className="register-form">
+      
     <Form
       name="normal_register"
-      className="register-form"
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
+      
     >
       <Form.Item
         name="firstname"
@@ -32,6 +46,9 @@ export default function RegisterScreen() {
         <Input
           prefix={<ContactsOutlined className="site-form-item-icon" />}
           placeholder="Firstname"
+          value = {registers.firstName}
+
+          onChange = {(value) => setRegisters({...registers, firstName: value.target.value})}
         />
       </Form.Item>
       <Form.Item
@@ -46,20 +63,24 @@ export default function RegisterScreen() {
         <Input
           prefix={<ContactsOutlined className="site-form-item-icon" />}
           placeholder="Lastname"
+          value={registers.lastName}
+          onChange = {(value) => setRegisters({...registers, lastName: value.target.value})}
         />
       </Form.Item>
       <Form.Item
-        name="username"
+        name="email"
         rules={[
           {
             required: true,
-            message: "Please input your Username!",
+            message: "Please input your email!",
           },
         ]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
+          placeholder="Email"
+          value={registers.email}
+          onChange = {(value) => setRegisters({...registers, email: value.target.value})}
         />
       </Form.Item>
       <Form.Item
@@ -75,6 +96,8 @@ export default function RegisterScreen() {
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
+          value={registers.password}
+          onChange = {(value) => setRegisters({...registers, password: value.target.value})}
         />
       </Form.Item>
       <Form.Item
@@ -90,15 +113,19 @@ export default function RegisterScreen() {
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Confirm Password"
+          value={registers.confirmPassword}
+          onChange = {(value) => setRegisters({...registers, confirmPassword: value.target.value})}
         />
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" onClick = {onFinish} htmlType="submit" className="login-form-button">
           Register
         </Button>
         Or <a href="">Already have account Login!</a>
       </Form.Item>
     </Form>
+    </div>
+    </>
   );
 }

@@ -3,7 +3,6 @@ import { Card, Row, Col, Layout, Menu } from "antd";
 import "antd/dist/antd.css";
 import "./catalog.css";
 import Background from "../images/HTML5_Logo_200.png";
-// import Sidebar from "../components/sider";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Catalog() {
